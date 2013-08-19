@@ -80,6 +80,7 @@ public class TwitterDataSource extends AbstractSource
 		}
 
 		String keywordString = context.getString("london", "");
+		
 		keywords = keywordString.split(",");
 		for (int i = 0; i < keywords.length; i++) {
 			keywords[i] = keywords[i].trim();
