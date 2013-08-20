@@ -1,7 +1,6 @@
 package com.jd.bigdata.flume;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -27,6 +26,8 @@ import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.json.DataObjectFactory;
 
+import com.jd.bigdata.PropertiesHelper;
+
 /**
  * A Flume Source, which pulls data from Twitter's streaming API. Currently,
  * this only supports pulling from the sample API, and only gets new status
@@ -47,13 +48,6 @@ public class TwitterDataSource extends AbstractSource
 
 	private String[] keywords;
 
-	public Properties loadProperties() throws IOException {
-		InputStream in = TwitterDataSource.class
-				.getResourceAsStream("/bigdata.properties");
-		Properties properties = new Properties();
-		properties.load(in);
-		return properties;
-	}
 
 	/** The actual Twitter stream. It's set up to collect raw JSON data */
 	private final TwitterStream twitterStream = new TwitterStreamFactory(
@@ -69,11 +63,11 @@ public class TwitterDataSource extends AbstractSource
 
 		try {
 			
-			Properties properties = loadProperties();
+			Properties properties = PropertiesHelper.loadProperties();
 
 			consumerKey = properties.getProperty("twitter.consumerkey");
 			consumerSecret = properties.getProperty("twitter.consumersecret");
-			accessToken = properties.getProperty("twitter.accessstoken");
+			accessToken = properties.getProperty("twitter.accesstoken");
 			accessTokenSecret = properties.getProperty("twitter.accesstokensecret");
 		} catch (IOException ex) {
 			logger.error("Unable to load properties file. Do you have bigdata.properties on your classpath?", ex);

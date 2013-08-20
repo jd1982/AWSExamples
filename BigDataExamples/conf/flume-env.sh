@@ -1,2 +1,2 @@
-FLUME_CLASSPATH="/home/ubuntu/BigDataExamples/target/BigDataExamples-0.1.jar:/home/ubuntu/BigDataExamples/target/dependency/*"
+FLUME_CLASSPATH="/home/ubuntu/AWSExamples/BigDataExamples/target/BigDataExamples-0.1.jar:/home/ubuntu/AWSExamples/BigDataExamples/target/dependency/*"
 echo $FLUME_CLASSPATH
