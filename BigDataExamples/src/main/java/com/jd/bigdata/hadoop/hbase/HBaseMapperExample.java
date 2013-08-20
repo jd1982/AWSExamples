@@ -92,7 +92,7 @@ public class HBaseMapperExample extends Configured implements Tool{
 	    			i += val.get();
 	    		}
 	    		Put put = new Put(Bytes.toBytes(key.toString()));
-	    		put.add(CF, COUNT, Bytes.toBytes(i));
+	    		put.add(CF, COUNT, Integer.toString(i).getBytes());
 
 	    		context.write(null, put);
 	   	}
