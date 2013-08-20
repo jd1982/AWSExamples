@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.Result;
@@ -16,6 +17,8 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.NullOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
@@ -58,7 +61,7 @@ public class HBaseMapperExample extends Configured implements Tool{
 	}
 
 	@Override
-	public int run(String[] arg0) throws Exception {
+	public int run(String[] args) throws Exception {
 	
 		Properties properties = PropertiesHelper.loadProperties();
 		
@@ -81,6 +84,10 @@ public class HBaseMapperExample extends Configured implements Tool{
 		job.setOutputFormatClass(NullOutputFormat.class);   // because we aren't emitting anything from mapper
 
 		job.setReducerClass(MyReducer.class);
+		FileInputFormat.setInputPaths(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		
+		System.out.println(args[0] + " " + args[1]);
 		
 		boolean b = job.waitForCompletion(true);
 		if (!b) {
