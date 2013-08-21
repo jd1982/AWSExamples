@@ -2,12 +2,12 @@
     <start to='firstjob' />
     <action name="firstjob">
         <map-reduce>
-            <job-tracker>ip-172-31-14-3.eu-west-1.compute.internal:8021</job-tracker>
-            <name-node>hdfs://ip-172-31-14-3.eu-west-1.compute.internal:8020</name-node>
+            <job-tracker>ip-172-31-47-100.eu-west-1.compute.internal:8021</job-tracker>
+            <name-node>hdfs://ip-172-31-47-100.eu-west-1.compute.internal:8020</name-node>
             <configuration>
                 <property>
                     <name>mapred.mapper.class</name>
-                    <value>com.jd.bigdata.hadoop.WordCount.Map</value>
+                    <value>com.jd.bigdata.hadoop.Map</value>
                 </property>
                 <property>
                     <name>mapred.reducer.class</name>
