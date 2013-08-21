@@ -7,19 +7,19 @@
            <configuration>
                                 <property>
                                         <name>mapred.mapper.new-api</name>
-                                        <value>true</value>
+                                        <value>false</value>
                                 </property>
                                 <property>
                                         <name>mapred.reducer.new-api</name>
-                                        <value>true</value>
+                                        <value>false</value>
                                 </property>
                                 <property>
-                                        <name>mapreduce.map.class</name>
-                                        <value>com.js.bigdata.hadoop.Map</value>
+                                        <name>mapred.mapper.class</name>
+                                        <value>com.jd.bigdata.hadoop.Map</value>
                                 </property>
                                 <property>
-                                        <name>mapreduce.reduce.class</name>
-                                        <value>com.js.bigdata.hadoop.Reduce</value>
+                                        <name>mapred.reducer.class</name>
+                                        <value>com.jd.bigdata.hadoop.Reduce</value>
                                 </property>
                                 <property>
                                         <name>mapred.mapoutput.key.class</name>
@@ -59,7 +59,7 @@
                                 </property>
                                 <property>
                                         <name>oozie.libpath</name>
-                                        <value>${oozie.wf.application.path}/lib</value>
+                                        <value>${nameNode}/lib</value>
                                 </property>
                             </configuration>
         </map-reduce>
