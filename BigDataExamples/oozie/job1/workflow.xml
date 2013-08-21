@@ -2,8 +2,8 @@
     <start to='firstjob' />
     <action name="firstjob">
         <map-reduce>
-            <job-tracker>ip-172-31-47-100.eu-west-1.compute.internal:8021</job-tracker>
-            <name-node>hdfs://ip-172-31-47-100.eu-west-1.compute.internal:8020</name-node>
+            <job-tracker>${nameNode}:8021</job-tracker>
+            <name-node>hdfs://${nameNode}:8020</name-node>
            <configuration>
                                 <property>
                                         <name>mapred.mapper.new-api</name>
@@ -59,7 +59,7 @@
                                 </property>
                                 <property>
                                         <name>oozie.libpath</name>
-                                        <value>${nameNode}/lib</value>
+                                        <value>${appPath}/lib</value>
                                 </property>
                             </configuration>
         </map-reduce>
