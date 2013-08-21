@@ -1,0 +1,38 @@
+<workflow-app name='example-forkjoinwf' xmlns="uri:oozie:workflow:0.1">
+    <start to='firstjob' />
+    <action name="firstjob">
+        <map-reduce>
+            <job-tracker>ip-172-31-14-3.eu-west-1.compute.internal:8021</job-tracker>
+            <name-node>hdfs://ip-172-31-14-3.eu-west-1.compute.internal:8020</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.mapper.class</name>
+                    <value>com.jd.bigdata.hadoop.WordCount.Map</value>
+                </property>
+                <property>
+                    <name>mapred.reducer.class</name>
+                    <value>com.jd.bigdata.hadoop.Reduce</value>
+                </property>
+                <property>
+                    <name>mapred.map.tasks</name>
+                    <value>1</value>
+                </property>
+                <property>
+                    <name>mapred.input.dir</name>
+                    <value>words/input</value>
+                </property>
+                <property>
+                    <name>mapred.output.dir</name>
+                    <value>words/output</value>
+                </property>
+            </configuration>
+        </map-reduce>
+        <ok to="end" />
+        <error to="kill" />
+    </action>
+    <kill name="kill">
+        <message>Map/Reduce failed, error message[${wf:errorMessage()}]</message>
+    </kill>
+    <end name='end'/>
+</workflow-app>
+

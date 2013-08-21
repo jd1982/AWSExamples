@@ -40,6 +40,10 @@ public class WordCount {
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
 
+		/*
+		 * (non-Javadoc)
+		 * @see org.apache.hadoop.mapred.Mapper#map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapred.OutputCollector, org.apache.hadoop.mapred.Reporter)
+		 */
 		public void map(LongWritable key, Text value,
 				OutputCollector<Text, IntWritable> output, Reporter reporter)
 				throws IOException {
@@ -61,6 +65,11 @@ public class WordCount {
 	 */
 	public static class Reduce extends MapReduceBase implements
 			Reducer<Text, IntWritable, Text, IntWritable> {
+		
+		/*
+		 * (non-Javadoc)
+		 * @see org.apache.hadoop.mapred.Reducer#reduce(java.lang.Object, java.util.Iterator, org.apache.hadoop.mapred.OutputCollector, org.apache.hadoop.mapred.Reporter)
+		 */
 		public void reduce(Text key, Iterator<IntWritable> values,
 				OutputCollector<Text, IntWritable> output, Reporter reporter)
 				throws IOException {
