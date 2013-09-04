@@ -1,15 +1,17 @@
 package com.jd.bigdata.hadoop.twitter;
 
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
-import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 /**
  * Hadoop Mapper and Reducer for counting instances of words in a file
@@ -17,7 +19,7 @@ import org.apache.hadoop.mapred.TextOutputFormat;
  * @author Jack
  * 
  */
-public class InfluentialUsers {
+public class InfluentialUsers extends Configured implements Tool{
 
 	/**
 	 * Sets up the word count job
@@ -26,10 +28,15 @@ public class InfluentialUsers {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		JobConf conf = new JobConf(InfluentialUsers.class);
-		conf.setJobName("wordcount");
+		int res = ToolRunner.run(new Configuration(), new InfluentialUsers(), args);
+	    System.exit(res);
+	}
 
-		conf.setOutputKeyClass(Text.class);
+	@Override
+	public int run(String[] args) throws Exception {
+		JobConf conf = new JobConf(getConf(), InfluentialUsers.class);
+	    conf.setJobName("Influenetial Users");
+	    conf.setOutputKeyClass(Text.class);
 		conf.setOutputValueClass(LongWritable.class);
 
 		conf.setMapperClass(TwitterMapper.class);
@@ -41,7 +48,7 @@ public class InfluentialUsers {
 
 		FileInputFormat.setInputPaths(conf, new Path(args[0]));
 		FileOutputFormat.setOutputPath(conf, new Path(args[1]));
-
-		JobClient.runJob(conf);
+		//JobClient.runJob(conf);
+	    return 0;
 	}
 }
